@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+"""
+Basic CPU & Memory Usage for Tmux
+
+Author: Zaiste! <oh@zaiste.net>
+
+Dash-meter inspired by tmux-mem-cpu
+and code from psutil top.py.
+"""
+
+import os
+import sys
+if os.name != 'posix':
+    sys.exit('platform not supported')
+
+import psutil
+
+def info():
+    mem = psutil.virtual_memory()
+    memused = mem.used
+    if sys.platform.lower().startswith("linux"):
+        memused-=mem.cached
+    line = "%s/%sMB %s%%" % (
+        str(int(memused / 1024 / 1024)),
+        str(int(mem.total / 1024 / 1024)),
+        psutil.cpu_percent(interval=0.1),
+    )
+    return line
+
+
+def main():
+    try:
+        print(info())
+    except (KeyboardInterrupt, SystemExit):
+        pass
+
+if __name__ == '__main__':
+    main()
