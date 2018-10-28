@@ -291,8 +291,3 @@ phist()
    [[ -n $1 ]] && n="-n $1"
    tail $n ~/.persistent_history
 }
-
-
-# Section: Flutter
-export PATH=$HOME/Dropbox/src/flutter/bin:$PATH
-
