@@ -3,10 +3,14 @@
 post_install_actions()
 {
   echo
+  echo "Here are recommended next steps:"
   if [[ $(uname) = 'Linux' ]]
   then
-    echo "Here are recommended next steps:"
     echo "  sudo apt-get install autojump"
+    echo "  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install"
+  elif [[ $(uname) = 'Darwin' ]]; then
+    echo "  /usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+    echo "  brew install git bash-completion"
   fi
   echo
 }
