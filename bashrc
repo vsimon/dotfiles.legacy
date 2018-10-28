@@ -3,10 +3,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Section: Aliases
+# Section: More
 
-alias l=ls
-alias sl=ls
 alias more='less'
 
 
@@ -42,6 +40,10 @@ alias gsgr='git stash && git fetch && git rebase origin/master && git stash pop'
 complete -o bashdefault -o default -o nospace -F _git g
 complete -o bashdefault -o default -o nospace -F _git tit
 
+#FIXME
+if [[ $(uname) = 'Linux' ]]; then
+  . /usr/lib/git-core/git-sh-prompt
+fi
 
 # Section: GOPATH
 
