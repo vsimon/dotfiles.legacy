@@ -34,7 +34,7 @@ fi
 
 # Section: Go
 
-export PATH=$PATH:/usr/local/go/bin:${HOME}/go/bin
+export PATH=$PATH:/usr/local/go/bin:~/go/bin
 
 # Section: Node
 
@@ -172,7 +172,7 @@ HISTIGNORE="cd:cd *:cdd *:"
 # written to the history file so they may be preserved across shell sessions.
 # This uses the history comment character to distinguish timestamps from other
 # history lines.
-HISTTIMEFORMAT="%Y-%m-%d %T %z "
+HISTTIMEFORMAT="%Y-%m-%d %T "
 
 # shopt: histappend
 # =================
@@ -248,8 +248,8 @@ __fzf_history__() (
   line=$(
     cat ~/.persistent_history |
     $(__fzfcmd) +s --tac +m -n2..,.. --tiebreak=index --toggle-sort=ctrl-r $FZF_CTRL_R_OPTS | \
-    grep '^.*[-+][0-9][0-9][0-9][0-9]\ |\ ')
-  sed 's/^.*[-+][0-9][0-9][0-9][0-9]\ |\ //' <<< "$line"
+    grep '^.*[0-9][0-9][:][0-9][0-9][:][0-9][0-9]\ |\ ')
+  sed 's/^.*[0-9][0-9][:][0-9][0-9][:][0-9][0-9]\ |\ //' <<< "$line"
 )
 
 
@@ -266,9 +266,8 @@ __fzf_history__() (
 
 log_bash_persistent_history()
 {
-   local HISTTIMEFORMAT="%Y-%m-%d %T %z "
    [[
-      $(history 1) =~ ^\ *[0-9]+\ +([^\ ]+\ [^\ ]+\ [^\ ]+)\ +(.*)$
+      $(history 1) =~ ^\ *[0-9]+\ +([^\ ]+\ [^\ ]+)\ +(.*)$
    ]]
    local date_part="${BASH_REMATCH[1]}"
    local command_part="${BASH_REMATCH[2]}"
